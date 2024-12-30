@@ -26,23 +26,8 @@ embeddings = download_hugging_face_embeddings()
 # defining pinecone index
 index_name = "medicalbot"
 
-# if already present, then just add to exiting, else create new
-# # Fetch or create
-# existing_indexes = [index_info["name"] for index_info in pc.list_indexes()
-# print(existing_indexes)
-
-# if index_name not in existing_indexes:
-#     pc.create_index(
-#         name=index_name,
-#         dimension=384,
-#         metric="cosine",
-#         spec=ServerlessSpec(cloud="aws", region="us-east-1"),
-#     )
-
-
 # Create and add embeddings to pinecone
 # Embed each chunk and upsert the embeddings into your Pinecone index.
-# Assumes that the data is already in pinecone and we only need to retrieve it. For data uploading, create a new function if needed.
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings,
